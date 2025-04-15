@@ -1,0 +1,112 @@
+# Microframework PHP + Next.js
+
+Este projeto é um sistema fullstack simples utilizando **PHP puro** (sem frameworks) no backend e **Next.js** no frontend. O backend gerencia usuários, clientes e endereços; e o frontend consome as rotas via API REST.
+
+---
+
+## ⚙️ Pré-requisitos
+
+- PHP 8+
+- Composer
+- Node.js + NPM
+- MySQL
+
+---
+
+## ✨ Passo a Passo para subir o projeto
+
+
+### 1.Configure o arquivo `.env`
+
+Crie o arquivo `.env` na raiz com base no exemplo abaixo:
+
+```dotenv
+DB_HOST=localhost
+DB_DATABASE=microframework
+DB_USERNAME=root
+DB_PASSWORD=root
+```
+
+---
+
+### 2.Instale as dependências do PHP
+
+```bash
+composer install
+```
+
+---
+
+### 3.Rode as migrations
+
+Cria o schema, tabelas no banco e popula com:
+
+- 1 usuário
+- 3 clientes
+- 3 endereços
+
+```bash
+composer migrate
+```
+
+---
+
+### 4.Configure e inicie o frontend
+
+```bash
+cd frontend
+npm install
+npm run dev
+```
+
+> O frontend estará disponível em: `http://localhost:3001` ou `http://localhost:3000
+
+---
+
+### 5.Inicie o backend PHP
+
+Na raiz do projeto:
+
+```bash
+composer start
+```
+
+> O backend estará rodando em: `http://localhost:8000`
+
+---
+
+### 5.Inicie os testes automatizados (Ele apaga os registros dos clientes e endereços do banco)
+
+Para rodar os testes automatizados, execute o seguinte comando na raiz do projeto:
+
+```bash
+composer test
+```
+O que acontece ao rodar o comando:
+O comando executa os testes automatizados utilizando o PHPUnit.
+
+Todos os testes de criação, atualização, exclusão e validação de clientes e endereços serão executados.
+
+Importante: O processo de teste apaga os registros de clientes e endereços do banco de dados ao final de cada teste para garantir que o ambiente de testes esteja sempre limpo para execuções futuras.
+
+---
+
+## 👤 Usuário de Teste
+
+Use este usuário no login para testar a aplicação:
+
+```text
+Email: john@example.com
+Senha: C_123456
+```
+---
+
+## ✅ Funcionalidades
+
+- Autenticação com login e cadastro
+- CRUD de clientes com múltiplos endereços
+- Validação no frontend e backend
+- Toasts com mensagens de sucesso e erro
+- Middleware de CORS e autenticação
+
+
