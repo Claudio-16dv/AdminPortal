@@ -25,6 +25,11 @@ class ClientService
         $clients = $this->clientModel->getAll();
 
         foreach ($clients as &$client) {
+            $birthdate = \DateTime::createFromFormat('Y-m-d', $client['birthdate']);
+            if ($birthdate) {
+                $client['birthdate'] = $birthdate->format('d/m/Y'); 
+            }
+
             $client['addresses'] = $this->addressModel->getAddressByClientId($client['id']);
         }
 

@@ -105,11 +105,34 @@ trait ValidationClientTrait
 
     protected function validateBirthdate(string $birthdate): string
     {
-        $date = \DateTime::createFromFormat('Y-m-d', $birthdate);
-        if (!$date || $date->format('Y-m-d') !== $birthdate) {
-            throw new InvalidArgumentException('Data de nascimento inválida. Use o formato Y-m-d.');
+        if (preg_match('/^\d{4}-\d{2}-\d{2}$/', $birthdate)) {
+            $date = \DateTime::createFromFormat('Y-m-d', $birthdate);
+            if (!$date) {
+                throw new InvalidArgumentException('Data de nascimento inválida.');
+            }
+            return $date->format('Y-m-d');
         }
-        return $birthdate;
+
+        if (preg_match('/^\d{4}\/\d{2}\/\d{2}$/', $birthdate)) {
+            $date = \DateTime::createFromFormat('Y/m/d', $birthdate);
+            if (!$date) {
+                throw new InvalidArgumentException('Data de nascimento inválida.');
+            }
+            return $date->format('Y-m-d');
+        }
+
+        $birthdate = str_replace('-', '/', $birthdate);
+
+        if (!preg_match('/^\d{2}\/\d{2}\/\d{4}$/', $birthdate)) {
+            throw new InvalidArgumentException('Data de nascimento inválida. Use os formatos dd/mm/yyyy, dd-mm-yyyy, ou yyyy-mm-dd.');
+        }
+
+        $date = \DateTime::createFromFormat('d/m/Y', $birthdate);
+        if (!$date) {
+            throw new InvalidArgumentException('Data de nascimento inválida.');
+        }
+
+        return $date->format('Y-m-d');
     }
 
     protected function validatePhone(string $phone): string
