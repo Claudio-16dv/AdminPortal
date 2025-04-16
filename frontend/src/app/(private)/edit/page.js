@@ -230,6 +230,11 @@ export default function Edit() {
     return original !== edited;
   };
 
+  const formatDateToDMY = (date) => {
+    const [year, month, day] = date.split("-");
+    return `${day}/${month}/${year}`;
+  };
+
   const hasInvalidAddress = (clientId) => {
     return formState[clientId]?.addresses?.some(addr => {
       if (!addr.id) {
@@ -266,7 +271,7 @@ export default function Edit() {
             {openId === c.id && formState[c.id] && formState[c.id].name !== undefined && (
               <div className={styles.clientDetails}>
                 <input className={styles.inputField} value={formState[c.id].name} onChange={(e) => handleChange(c.id, "name", e.target.value)} placeholder="Nome" />
-                <input className={styles.inputField} value={formState[c.id].birthdate} onChange={(e) => handleChange(c.id, "birthdate", e.target.value)} placeholder="Data de Nascimento" />
+                <input className={styles.inputField} value={formatDateToDMY(formState[c.id].birthdate)} onChange={(e) => handleChange(c.id, "birthdate", formatDateToISO(e.target.value))} placeholder="Data de Nascimento" />
                 <input className={styles.inputField} value={formState[c.id].cpf} onChange={(e) => handleChange(c.id, "cpf", e.target.value)} placeholder="CPF" />
                 <input className={styles.inputField} value={formState[c.id].rg} onChange={(e) => handleChange(c.id, "rg", e.target.value)} placeholder="RG" />
                 <input className={styles.inputField} value={formState[c.id].phone} onChange={(e) => handleChange(c.id, "phone", e.target.value)} placeholder="Telefone" />
