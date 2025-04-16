@@ -83,7 +83,7 @@ composer start
 
 ---
 
-### 5.Inicie os testes automatizados (Ele apaga os registros dos clientes e endereços do banco)
+### 6.Inicie os testes automatizados (Ele apaga os registros dos clientes e endereços do banco)
 
 Para rodar os testes automatizados, execute o seguinte comando na raiz do projeto:
 
